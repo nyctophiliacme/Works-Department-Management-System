@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f2e00c42-14f6-47b8-bdbb-b9acb9605038">
+    <property name="ireport.zoom" value="1.100000000000001"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="423"/>
+    <parameter name="payOrderId" class="java.lang.Integer">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <queryString>
+		<![CDATA[SELECT
+     bills.`bill_date` AS bills_bill_date,
+     works_order.`title` AS works_order_title,
+     works_order.`short_desc` AS works_order_short_desc,
+     vendor_master.`vendor_name` AS vendor_master_vendor_name,
+     vendor_master.`address_1` AS vendor_master_address_1,
+     vendor_master.`address_2` AS vendor_master_address_2,
+     vendor_master.`address_3` AS vendor_master_address_3,
+     vendor_master.`address_4` AS vendor_master_address_4,
+     vendor_master.`address_5` AS vendor_master_address_5,
+     vendor_master.`address_6` AS vendor_master_address_6,
+     bills.`wo_no` AS bills_wo_no,
+     vendor_master.`IFSC` AS vendor_master_IFSC,
+     vendor_master.`MICR` AS vendor_master_MICR,
+     vendor_master.`account_no` AS vendor_master_account_no,
+     bills.`bills_no` AS bills_bills_no,
+     vendor_master.`bank_name` AS vendor_master_bank_name,
+     vendor_master.`branch_name` AS vendor_master_branch_name
+FROM
+     `works_order` works_order INNER JOIN `bills` bills ON works_order.`wo_no` = bills.`wo_no`
+     INNER JOIN `vendor_master` vendor_master ON works_order.`vendor_id` = vendor_master.`vendor_id`
+     INNER JOIN `ra_bill` ra_bill ON bills.`bills_id` = ra_bill.`bills_id`
+     INNER JOIN `pay_order` pay_order ON ra_bill.`ra_bill_id` = pay_order.`ra_bill_id`
+WHERE
+     pay_order_id = $P{payOrderId}]]>
+    </queryString>
+    <field name="bills_bill_date" class="java.sql.Date"/>
+    <field name="works_order_title" class="java.lang.String"/>
+    <field name="works_order_short_desc" class="java.lang.String"/>
+    <field name="vendor_master_vendor_name" class="java.lang.String"/>
+    <field name="vendor_master_address_1" class="java.lang.String"/>
+    <field name="vendor_master_address_2" class="java.lang.String"/>
+    <field name="vendor_master_address_3" class="java.lang.String"/>
+    <field name="vendor_master_address_4" class="java.lang.String"/>
+    <field name="vendor_master_address_5" class="java.lang.String"/>
+    <field name="vendor_master_address_6" class="java.lang.String"/>
+    <field name="bills_wo_no" class="java.lang.String"/>
+    <field name="vendor_master_IFSC" class="java.lang.String"/>
+    <field name="vendor_master_MICR" class="java.lang.String"/>
+    <field name="vendor_master_account_no" class="java.lang.Long"/>
+    <field name="bills_bills_no" class="java.lang.String"/>
+    <field name="vendor_master_bank_name" class="java.lang.String"/>
+    <field name="vendor_master_branch_name" class="java.lang.String"/>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="2" splitType="Stretch"/>
+    </title>
+    <pageHeader>
+        <band height="207" splitType="Stretch">
+            <staticText>
+                <reportElement x="189" y="27" width="191" height="29" uuid="9cdb019f-9e41-4815-a3f9-73a4e4259360"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" size="12"/>
+                </textElement>
+                <text><![CDATA[Bhabha Atomic Reseach Centre]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="189" y="-1" width="167" height="28" uuid="fd17dc67-88ea-44b9-9656-55ac055caf93"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" size="12"/>
+                </textElement>
+                <text><![CDATA[Government Of India]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="189" y="56" width="167" height="26" uuid="aa59f292-16d6-4060-acd0-852c7ce0a545"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" size="12"/>
+                </textElement>
+                <text><![CDATA[Accounts Division]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="115" y="114" width="74" height="20" uuid="d5d77655-a546-4f0b-a506-222d00195adf"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Subject:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="254" y="114" width="151" height="20" uuid="80da0d67-c67b-4a72-8fe4-7b8ef50b19eb"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Payment of bill]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="115" y="154" width="74" height="20" uuid="89899f60-4e54-48e3-9eb9-49c129e2f192"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Date:]]></text>
+            </staticText>
+            <textField pattern="MMMMM dd, yyyy">
+                <reportElement x="254" y="154" width="151" height="20" uuid="50bcbde4-97af-44dd-9697-f358994a6dee"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band height="448" splitType="Stretch">
+            <staticText>
+                <reportElement x="115" y="0" width="90" height="20" uuid="ea6e9601-8eca-4e23-b5e5-95c802a090e3"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Bills No & Date:]]></text>
+            </staticText>
+            <textField pattern="MMMMM dd, yyyy">
+                <reportElement x="354" y="0" width="100" height="20" uuid="c9930cda-2098-4512-8136-0ef012eab8aa"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{bills_bill_date}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="115" y="40" width="90" height="20" uuid="2a951214-1a7a-42d3-b9f0-a0eb69f62cbb"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Name of Work:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="254" y="40" width="100" height="20" uuid="7d9b7984-3b7b-46f8-af32-a32d4a965e4a"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{works_order_title}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="254" y="60" width="100" height="48" uuid="a62067ed-7892-48ed-8655-8a90d2f7b067"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{works_order_short_desc}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="115" y="135" width="90" height="20" uuid="f7348cc1-682a-4488-8bc9-55ebc6eabd16"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Agency Address:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="254" y="135" width="100" height="20" uuid="08df77cf-e4a3-4351-98b9-d20178ef2610"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{vendor_master_vendor_name}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="254" y="155" width="100" height="20" uuid="ece6e666-f149-454b-9e12-d0e4cf461690"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{vendor_master_address_1}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="254" y="175" width="100" height="20" uuid="0b28a8c6-fdc8-4823-9c6e-3a0b903b62c0"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{vendor_master_address_2}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="254" y="195" width="100" height="20" uuid="9ffe625d-92f2-48ce-ad22-a8fbe95818cc"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{vendor_master_address_3}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="254" y="215" width="100" height="20" uuid="bb4aac91-da95-4a7c-83f7-6ad548e30194"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{vendor_master_address_4}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="254" y="235" width="100" height="20" uuid="9adf9307-17a2-44ad-b0a9-3862343a4d03"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{vendor_master_address_5}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="254" y="255" width="100" height="20" uuid="bf9a7a88-b0f6-4b9d-b358-426caa32be05"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{vendor_master_address_6}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="115" y="299" width="90" height="20" uuid="2f48ebbf-cee9-4929-b085-bbf8e293bc6f"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Work Order No:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="254" y="299" width="100" height="20" uuid="ee6d4475-ab16-4829-9c27-6975db2b8b03"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{bills_wo_no}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="115" y="342" width="90" height="45" uuid="eeadd815-0389-4ecf-a851-e39d204c26dd"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Payment Instruction if any:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="254" y="0" width="100" height="20" uuid="598e8e5f-b3cc-48f7-9371-b0441a077a63"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{bills_bills_no}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="256" y="342" width="124" height="33" uuid="32d0f8ae-2749-4fb2-82da-1e403f9fcfc6"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{vendor_master_bank_name}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="394" y="342" width="108" height="33" uuid="f1d7ffd0-5f6a-4d28-af81-3a886ae8b8ca"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{vendor_master_branch_name}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="380" y="342" width="10" height="33" uuid="cecc1f9b-65fe-4cc8-976c-3bd21f62fd41"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[,]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="257" y="375" width="65" height="20" uuid="df1d11d1-9a62-4c70-95e3-5352a725cb19"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Account no:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="257" y="395" width="65" height="20" uuid="2971562a-284f-4f32-8e30-b6f7aed6da8b"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[IFSC no:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="257" y="415" width="65" height="20" uuid="60364abc-e30e-4e03-b3bd-fdf23e505df8"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[MICR Code:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="322" y="375" width="100" height="20" uuid="9dc2514f-6d69-45a8-9458-c51821146de5"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{vendor_master_account_no}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="322" y="395" width="100" height="20" uuid="ff7ef317-7703-462f-b4ed-5fd8cff09e56"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{vendor_master_IFSC}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="322" y="415" width="100" height="20" uuid="4e639bd2-cccb-46d1-92a6-338ded377d1d"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{vendor_master_MICR}]]></textFieldExpression>
+            </textField>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="11" splitType="Stretch"/>
+    </detail>
+    <columnFooter>
+        <band splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band height="4" splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band height="4" splitType="Stretch"/>
+    </summary>
+</jasperReport>

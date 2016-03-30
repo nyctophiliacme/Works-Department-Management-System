@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report4" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7b4bb8dd-f5df-4b07-b87f-a9970f150578">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#EFF7FF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="New Dataset 1" uuid="f459e728-e59c-42f6-84e9-4f0c926dde56">
+		<parameter name="expDate" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+     bank_guarantee.`bank_guarantee_id` AS bank_guarantee_bank_guarantee_id,
+     bank_guarantee.`bank_guarantee_code` AS bank_guarantee_bank_guarantee_code,
+     bank_guarantee.`amount` AS bank_guarantee_amount,
+     bank_guarantee.`expiry_date` AS bank_guarantee_expiry_date,
+     bank_guarantee.`extended_expiry_date` AS bank_guarantee_extended_expiry_date,
+     vendor_master.`vendor_name` AS vendor_master_vendor_name,
+     bank_guarantee.`wo_no` AS bank_guarantee_wo_no,
+     works_order.`title` AS works_order_title,
+     works_order.`short_desc` AS works_order_short_desc,
+     employee.`emp_name` AS employee_emp_name
+FROM
+     `vendor_master` vendor_master INNER JOIN `bank_guarantee` bank_guarantee ON vendor_master.`vendor_id` = bank_guarantee.`vendor_id`
+     INNER JOIN `works_order` works_order ON vendor_master.`vendor_id` = works_order.`vendor_id`
+     AND works_order.`wo_no` = bank_guarantee.`wo_no`
+     INNER JOIN `employee` employee ON works_order.`emp_no` = employee.`emp_no`
+WHERE
+     bank_guarantee.extended_expiry_date > $P{expDate}
+ OR bank_guarantee.expiry_date > $P{expDate}]]>
+		</queryString>
+		<field name="bank_guarantee_bank_guarantee_id" class="java.lang.Integer"/>
+		<field name="bank_guarantee_bank_guarantee_code" class="java.lang.String"/>
+		<field name="bank_guarantee_amount" class="java.lang.Double"/>
+		<field name="bank_guarantee_expiry_date" class="java.sql.Date"/>
+		<field name="bank_guarantee_extended_expiry_date" class="java.sql.Date"/>
+		<field name="vendor_master_vendor_name" class="java.lang.String"/>
+		<field name="bank_guarantee_wo_no" class="java.lang.String"/>
+		<field name="works_order_title" class="java.lang.String"/>
+		<field name="works_order_short_desc" class="java.lang.String"/>
+		<field name="employee_emp_name" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="expDate" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     bank_guarantee.`bank_guarantee_id` AS bank_guarantee_bank_guarantee_id,
+     bank_guarantee.`bank_guarantee_code` AS bank_guarantee_bank_guarantee_code,
+     bank_guarantee.`amount` AS bank_guarantee_amount,
+     bank_guarantee.`expiry_date` AS bank_guarantee_expiry_date,
+     bank_guarantee.`extended_expiry_date` AS bank_guarantee_extended_expiry_date,
+     vendor_master.`vendor_name` AS vendor_master_vendor_name,
+     bank_guarantee.`wo_no` AS bank_guarantee_wo_no,
+     works_order.`title` AS works_order_title,
+     works_order.`short_desc` AS works_order_short_desc,
+     employee.`emp_name` AS employee_emp_name
+FROM
+     `vendor_master` vendor_master INNER JOIN `bank_guarantee` bank_guarantee ON vendor_master.`vendor_id` = bank_guarantee.`vendor_id`
+     INNER JOIN `works_order` works_order ON vendor_master.`vendor_id` = works_order.`vendor_id`
+     AND works_order.`wo_no` = bank_guarantee.`wo_no`
+     INNER JOIN `employee` employee ON works_order.`emp_no` = employee.`emp_no`
+WHERE
+     bank_guarantee.extended_expiry_date > $P{expDate}
+OR bank_guarantee.expiry_date > $P{expDate}]]>
+	</queryString>
+	<field name="bank_guarantee_bank_guarantee_id" class="java.lang.Integer"/>
+	<field name="bank_guarantee_bank_guarantee_code" class="java.lang.String"/>
+	<field name="bank_guarantee_amount" class="java.lang.Double"/>
+	<field name="bank_guarantee_expiry_date" class="java.sql.Date"/>
+	<field name="bank_guarantee_extended_expiry_date" class="java.sql.Date"/>
+	<field name="vendor_master_vendor_name" class="java.lang.String"/>
+	<field name="bank_guarantee_wo_no" class="java.lang.String"/>
+	<field name="works_order_title" class="java.lang.String"/>
+	<field name="works_order_short_desc" class="java.lang.String"/>
+	<field name="employee_emp_name" class="java.lang.String"/>
+	<variable name="variable1" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="236" y="0" width="223" height="35" uuid="90f5eeec-2611-4909-81d8-d595e60591f9"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Bank Guarantees which will expire after ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="459" y="0" width="100" height="35" uuid="3af5db83-da19-46f5-9d00-c1eef105818d"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{expDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="137" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="0" width="802" height="125" uuid="85de4491-99d7-4e02-8851-0dbb3a83b6dc"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="New Dataset 1" uuid="316f63d5-279c-4714-b877-82b944754732">
+						<datasetParameter name="expDate">
+							<datasetParameterExpression><![CDATA[$P{expDate}]]></datasetParameterExpression>
+						</datasetParameter>
+					</datasetRun>
+					<jr:column width="65" uuid="0ea447f9-8ee9-4cf7-a74b-ee394777164c">
+						<jr:columnHeader style="table_CH" height="48" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="65" height="48" uuid="3c951e41-940c-415a-8767-6a0574fdfce3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Serial No.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="87" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="65" height="87" uuid="3f15ba89-58f3-4e21-87b7-8aa710e21a73"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="34" uuid="23adb38c-cc65-4c94-8a97-01e20df33ac5">
+						<jr:columnHeader style="table_CH" height="48" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="34" height="48" uuid="95475f39-9204-4f16-abde-cdafe30c0f09"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[BG ID]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="87" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="34" height="87" uuid="a98bddd2-edfb-42c4-be25-ebb10ea251c4"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{bank_guarantee_bank_guarantee_id}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="46" uuid="fb1e9a14-b43c-46c5-8228-2c7ad15c7cea">
+						<jr:columnHeader style="table_CH" height="48" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="46" height="48" uuid="27d41d44-118b-40a4-a267-89a77e077c10"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[BG no.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="87" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="46" height="87" uuid="083cab5a-cd1d-4c88-8365-6f7db99f0f28"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{bank_guarantee_bank_guarantee_code}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="69" uuid="da50ab4b-2e4c-4a44-a4b9-c9b9d5d45319">
+						<jr:columnHeader style="table_CH" height="48" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="68" height="48" uuid="1cd2298b-55f6-4811-bf41-a1b9759f5727"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Amount]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="87" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="68" height="87" uuid="99e62438-c07c-47f4-a4f0-baf77ab798f5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{bank_guarantee_amount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="87" uuid="3c43c247-909d-4a7e-8956-b44bbc3b86f0">
+						<jr:columnHeader style="table_CH" height="48" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="87" height="48" uuid="0098cc82-517d-443b-8476-fd8b2c8c9113"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Validity]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="87" rowSpan="1">
+							<textField pattern="MMMMM dd, yyyy" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="87" height="87" uuid="4fc5ecff-ff46-4bef-8934-38ad667e9577"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{bank_guarantee_expiry_date}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="86" uuid="cdd83cc7-38f8-448b-acdb-7d29546a9f81">
+						<jr:columnHeader style="table_CH" height="48" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="86" height="48" uuid="9161aa24-b693-41a5-aadf-86a1185e092c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Extended]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="87" rowSpan="1">
+							<textField pattern="MMMMM dd, yyyy">
+								<reportElement x="0" y="0" width="86" height="87" uuid="ce04557d-c2b3-471f-a4f7-9252f842e383"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{bank_guarantee_extended_expiry_date}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="c551cea2-823e-45e4-b2e4-6af12741f5b0">
+						<jr:columnHeader style="table_CH" height="48" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="48" uuid="d396623b-0170-4c3d-9530-f5b3416920d8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Vendor Name]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="87" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="87" uuid="eb9d7ee0-e069-4f6e-baf8-562b6868e34a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{vendor_master_vendor_name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="73" uuid="313dd2a5-fbd0-4661-b08d-077c5b39a365">
+						<jr:columnHeader style="table_CH" height="48" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="73" height="48" uuid="69675984-d3b5-4d3a-8b1c-160a0d036b59"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[WO_NO.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="87" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="73" height="87" uuid="4590fa3c-6864-4168-992f-02707a64c689"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{bank_guarantee_wo_no}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="ff34fe22-173a-44e2-83b1-f9eb8b228c73">
+						<jr:columnHeader style="table_CH" height="48" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="48" uuid="9dce888e-f6f3-4a62-bc4a-5144d0e01de6"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Nature of Work]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="87" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="87" uuid="a27ce7c6-c74c-4ddc-8768-904fa7898e4e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{works_order_title}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="82" uuid="ac3215f3-418b-4509-a69e-de23d9c7bc5f">
+						<jr:columnHeader style="table_CH" height="48" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="82" height="48" uuid="8016f542-fc24-455c-ad18-185e210a34fc"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[  Short Desc]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="87" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="82" height="87" uuid="6a16efb6-f6de-4b8d-ae56-702f950c693a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{works_order_short_desc}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="3e5766d5-afb5-43e0-941e-c17d29027715">
+						<jr:columnHeader style="table_CH" height="48" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="48" uuid="9f398d0d-eca2-4450-b3d3-9d45b7f836d5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Engg in charge]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="87" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="87" uuid="5cdba420-d1bb-4032-9057-ba2a338f76c1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{employee_emp_name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="8" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="8" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="9" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="6" splitType="Stretch"/>
+	</summary>
+</jasperReport>
