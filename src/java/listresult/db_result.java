@@ -5,20 +5,10 @@
  */
 package listresult;
 
-import java.sql.*;
-import java.util.GregorianCalendar;
 import java.io.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Iterator;
-import java.util.Calendar;
-import java.util.Date;
-import javax.servlet.http.HttpServletResponse;
+import java.sql.*;
 
 /**
- *
  * @author Pransh Tiwari
  */
 public class db_result {
